@@ -4,55 +4,56 @@
 {% block title %}Головна - Мій Блог{% endblock %}
 
 {% block content %}
-    <h1>Ласкаво просимо до мого блогу!</h1>
-
     <div class="main-content-area">
         <section class="latest-posts">
             <h2>Останні публікації</h2>
+            <hr style="margin-top: 0.5em; margin-bottom: 1.5em;">
             {% if articles %}
                 {% for item in articles %}
                     <article class="article-summary">
-                         <h4><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
-                         <p class="article-meta">Опубліковано: {{ item.pub_date|date:"d F Y" }}</p>
-                         {% if item.images.all %}
+                        {% if item.images.all %}
                             <div class="article-image-container">
                                 <a href="{{ item.get_absolute_url }}">
                                     <img src="{{ item.images.all.0.image.url }}" alt="{{ item.images.all.0.title }}">
                                 </a>
                             </div>
-                         {% endif %}
-                         <div class="article-description">
+                        {% endif %}
+                        <h4><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
+                        <p class="article-meta">Опубліковано: {{ item.pub_date|date:"d F Y" }}</p>
+                        <div class="article-description">
                             {{ item.description|striptags|truncatewords_html:35 }}
-                         </div>
-                         <a href="{{ item.get_absolute_url }}" class="read-more-link">Читати далі &rarr;</a>
-                         <div class="clearfix"></div>
+                        </div>
+                        <a href="{{ item.get_absolute_url }}" class="read-more-link">Читати далі &rarr;</a>
+                        <div class="clearfix"></div>
                     </article>
+                {% empty %}
+                    <p>Ще немає публікацій для головної сторінки.</p>
                 {% endfor %}
             {% else %}
-                <p>Ще немає публікацій для головної сторінки.</p>
+                 <p>Ще немає публікацій для головної сторінки.</p>
             {% endif %}
-             <hr>
-             <a href="{% url 'articles-list' %}" class="read-more-link" style="background-color: #28a745;">Переглянути всі публікації</a>
         </section>
     </div>
 
     <aside class="sidebar">
         <section class="categories">
             <h2>Категорії</h2>
+            <hr style="margin-top: 0.5em; margin-bottom: 1.5em;">
             {% if categories %}
                 <ul class="category-list">
                     {% for item in categories %}
                         <li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li>
+                    {% empty %}
+                         <li>Категорій ще немає.</li>
                     {% endfor %}
                 </ul>
             {% else %}
                 <p>Категорій ще немає.</p>
             {% endif %}
         </section>
-         </aside>
-    <div class="clearfix"></div> 
-
-{% endblock %}
-
-{% block extra_scripts %}
+        <section style="margin-top: 30px;">
+            <a href="{% url 'articles-list' %}" class="read-more-link" style="background-color: #17a2b8; display: block; text-align: center;">Всі публікації</a>
+        </section>
+    </aside>
+    <div class="clearfix"></div>
 {% endblock %}

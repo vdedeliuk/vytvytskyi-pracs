@@ -3,27 +3,26 @@
 
 {% block title %}
     {% if category %}
-        Публікації в категорії "{{ category.name }}"
+        Публікації: {{ category.name }}
     {% else %}
         Всі Публікації
     {% endif %}
-    - Мій Блог
+     - Мій Блог
 {% endblock %}
 
 {% block content %}
     <h1>
         {% if category %}
-            Публікації в категорії: {{ category.name }}
+            Публікації в категорії: "{{ category.name }}"
         {% else %}
             Всі Публікації
         {% endif %}
     </h1>
+     <hr style="margin-top: 0.5em; margin-bottom: 1.5em;"> 
 
     {% if items %}
         {% for item in items %}
             <article class="articles-row">
-                 <h4><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
-                 <p class="article-meta">Опубліковано: {{ item.pub_date|date:"d F Y" }}</p>
                  {% if item.images.all %}
                     <div class="article-image-container">
                         <a href="{{ item.get_absolute_url }}">
@@ -31,11 +30,13 @@
                         </a>
                     </div>
                  {% endif %}
+                 <h4><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
+                 <p class="article-meta">Опубліковано: {{ item.pub_date|date:"d F Y" }}</p>
                  <div class="article-description">
                     {{ item.description|striptags|truncatewords_html:40 }}
                  </div>
                  <a href="{{ item.get_absolute_url }}" class="read-more-link">Читати далі &rarr;</a>
-                 <div class='clearfix'></div>
+                 <div class='clearfix'></div> 
             </article>
         {% endfor %}
     {% else %}

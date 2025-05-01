@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+
+    background-image: url('../img/bg.jpg');
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+}
+
+a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #003d80;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.8em; border-bottom: 1px solid #eee; padding-bottom: 0.3em; margin-bottom: 1em;}
+h3 { font-size: 1.5em; }
+h4 { font-size: 1.2em; color: #0056b3; margin-top: 1em; margin-bottom: 0.3em; }
+
+p {
+    margin-bottom: 1em;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 2em 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 25px;
+}
+
+.site-header .logo a {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #222;
+    text-decoration: none;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav li {
+    margin-left: 20px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+.main-nav a:hover, .main-nav a.active {
+    color: #0056b3;
+    border-bottom-color: #0056b3;
+}
+.admin-link {
+    background-color: #5a6268;
+    color: white !important;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    border-bottom: none !important;
+    transition: background-color 0.3s ease;
+}
+.admin-link:hover {
+    background-color: #42474c;
+    text-decoration: none;
+}
+
+.container > h1.site-title-pdf-style {
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  padding: 10px 0;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.article-summary, .articles-row {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+.article-summary:hover, .articles-row:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.article-summary h4 a, .articles-row h4 a {
+    color: #0056b3;
+    text-decoration: none;
+}
+.article-summary h4 a:hover, .articles-row h4 a:hover {
+    text-decoration: underline;
+}
+
+.article-meta {
+    font-size: 0.85em;
+    color: #777;
+    margin-bottom: 12px;
+}
+
+.article-description {
+    color: #444;
+}
+
+.article-image-container {
+    float: left;
+    margin: 0 20px 10px 0;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.article-image-container img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.read-more-link {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white !important;
+    padding: 8px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.read-more-link:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.article-detail h3 {
+    margin-top: 0;
+    font-size: 2em;
+    color: #222;
+    margin-bottom: 0.2em;
+}
+
+.article-detail .article-meta {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.article-content {
+    margin-top: 25px;
+    line-height: 1.7;
+}
+.article-content img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-radius: 4px;
+}
+
+.fotorama-container {
+    margin: 30px 0;
+}
+
+.breadcrumb {
+    background-color: #eef2f7;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    font-size: 0.9em;
+}
+.breadcrumb > li {
+  margin: 0 3px;
+}
+
+.category-list {
+    list-style: none;
+    padding: 0;
+}
+.category-list li {
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+.category-list li:hover {
+    background-color: #e9ecef;
+}
+.category-list li a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #495057;
+    display: block;
+}
+.category-list li a:hover {
+    color: #0056b3;
+}
+
+.site-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 25px 0;
+    border-top: 1px solid #ddd;
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.main-content-area {
+    width: 67%;
+    float: left;
+    padding-right: 3%;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    width: 30%;
+    float: right;
+    box-sizing: border-box;
+}
+.sidebar .categories h2 {
+    margin-top: 0;
+    font-size: 1.6em;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+@media (max-width: 768px) {
+    .main-content-area,
+    .sidebar {
+        width: 100%;
+        float: none;
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .main-nav ul {
+        margin-top: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+     .main-nav li {
+        margin-left: 0;
+        margin-bottom: 8px;
+    }
+    .article-image-container {
+        width: 120px;
+        height: 120px;
+        float: left;
+        margin: 0 10px 10px 0;
+    }
+    .article-content img {
+        max-width: 100%;
+        width: auto;
+        height: auto;
+    }
+}

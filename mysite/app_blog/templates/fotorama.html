@@ -2,19 +2,19 @@
 {% load static %}
 
 <div class="fotorama"
-     data-nav="thumbs"    
-     data-allowfullscreen="true" 
-     data-loop="true"      
-     data-keyboard="true"  
-     data-width="500"      
-     data-height="500"     
-     data-fit="cover"      
-     data-thumbwidth="80"  
+     data-nav="thumbs"
+     data-allowfullscreen="true"
+     data-loop="true"
+     data-keyboard="true"
+     data-width="{{ gallery_width|default:'100%' }}" 
+     data-height="{{ gallery_height|default:450 }}" 
+     data-fit="contain"    
+     data-thumbwidth="80"
      data-thumbheight="80">
     {% for image in images %}
         <img src='{{ image.image.url }}'
-             alt="{{ image.title }}" 
-             data-caption="{{ image.title }}"> 
+             alt="{{ image.title }}"
+             data-caption="{{ image.title }}">
     {% endfor %}
 </div>
 {% endspaceless %}

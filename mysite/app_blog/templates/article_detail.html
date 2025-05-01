@@ -23,17 +23,18 @@
 
         <h3>{{ item.title }}</h3>
         <p class="article-meta">Опубліковано: {{ item.pub_date|date:"d F Y H:i" }}</p>
+        <hr style="margin-top: 1em; margin-bottom: 1.5em;">
 
         {% if images %}
             <div class="fotorama-container">
-                {% include 'fotorama.html' with images=images %}
+                {% include 'fotorama.html' with images=images gallery_width="100%" gallery_height="450" %}
             </div>
+             <hr style="margin-top: 1.5em; margin-bottom: 1.5em;">
         {% endif %}
 
         <div class="article-content">
             {% if item.description %}
-                <strong>{{ item.description|safe }}</strong>
-                <hr>
+                <p><strong>{{ item.description|safe }}</strong></p> 
             {% endif %}
 
             {{ item.text|linebreaksbr }} 
