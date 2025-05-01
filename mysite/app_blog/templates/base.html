@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мій Блог{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'app_blog/css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <div class="logo">
+                <a href="{% url 'home' %}">Мій Супер Блог</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="{% url 'home' %}">Головна</a></li>
+                    <li><a href="{% url 'articles-list' %}">Всі Публікації</a></li>
+                    <li><a href="/admin/" class="admin-link">Адмін</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="content">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; {% now "Y" %} Мій Супер Блог. Всі права захищено.</p>
+        </footer>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

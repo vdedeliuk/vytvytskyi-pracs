@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %}
+        Публікації в категорії "{{ category.name }}"
+    {% else %}
+        Всі Публікації
+    {% endif %}
+    - Мій Блог
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {% if category %}
+            Публікації в категорії: {{ category.name }}
+        {% else %}
+            Всі Публікації
+        {% endif %}
+    </h1>
+
+    {% if items %}
+        {% for item in items %}
+            <article class="articles-row">
+                 <h4><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
+                 <p class="article-meta">Опубліковано: {{ item.pub_date|date:"d F Y" }}</p>
+                 {% if item.images.all %}
+                    <div class="article-image-container">
+                        <a href="{{ item.get_absolute_url }}">
+                            <img src="{{ item.images.all.0.image.url}}" alt="{{ item.images.all.0.title }}" />
+                        </a>
+                    </div>
+                 {% endif %}
+                 <div class="article-description">
+                    {{ item.description|striptags|truncatewords_html:40 }}
+                 </div>
+                 <a href="{{ item.get_absolute_url }}" class="read-more-link">Читати далі &rarr;</a>
+                 <div class='clearfix'></div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>
+            {% if category %}
+                В цій категорії ще немає публікацій.
+            {% else %}
+                Публікацій ще немає.
+            {% endif %}
+        </p>
+    {% endif %}
+
+{% endblock %}

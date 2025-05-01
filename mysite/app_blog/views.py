@@ -1,48 +1,60 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView
-from django.views.decorators.http import require_POST
-from .models import Article, Category
-from .forms import ArticleImageForm, ArticleForm
+from django.views.generic import TemplateView, ListView, DateDetailView
+from .models import Article, Category, ArticleImage
 
-class HomePageView(TemplateView):
-    def get(self, request, **kwargs):
-        form = ArticleImageForm()
-        posts = Article.objects.prefetch_related('images').all()
+
+class HomePageView(ListView):
+    model = Article
+    template_name = 'index.html'
+    context_object_name = 'categories'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context['articles'] = Article.objects.filter(main_page=True)[:5]
+        return context
+
+    def get_queryset(self, *args, **kwargs):
         categories = Category.objects.all()
-        return render(request, 'index.html', {'form': form, 'posts': posts, 'categories': categories})
+        return categories
 
-    def post(self, request, **kwargs):
-        form = ArticleImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        posts = Article.objects.prefetch_related('images').all()
-        categories = Category.objects.all()
-        return render(request, 'index.html', {'form': form, 'posts': posts, 'categories': categories})
+class ArticleDetail(DateDetailView):
+    model = Article
+    template_name = 'article_detail.html'
+    context_object_name = 'item'
+    date_field = 'pub_date'
+    query_pk_and_slug = True
+    month_format = '%m'
+    allow_future = True
 
-@require_POST
-def delete_post(request, post_id):
-    post = get_object_or_404(Article, id=post_id)
-    post.delete()
-    return redirect('home')
+    def get_context_data(self, *args, **kwargs):
+        context = super(ArticleDetail, self).get_context_data(*args, **kwargs)
+        try:
+            context['images'] = context['item'].images.all()
+        except:
+            pass
+        return context
 
-def manage_posts(request):
-    if request.method == 'POST':
-        form = ArticleImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = ArticleImageForm()
-    posts = Article.objects.prefetch_related('images').all()
-    return render(request, 'index.html', {'form': form, 'posts': posts})
+class ArticleList(ListView):
+    model = Article
+    template_name = 'articles_list.html'
+    context_object_name = 'items'
 
-def create_article(request):
-    if request.method == 'POST':
-        form = ArticleForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = ArticleForm()
-    return render(request, 'create_article.html', {'form': form})
+    def get_context_data(self, *args, **kwargs):
+        context = super(ArticleList, self).get_context_data(*args, **kwargs)
+        try:
+            context['category'] = Category.objects.get(slug=self.kwargs.get('slug'))
+        except Exception:
+            context['category'] = None
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        articles = Article.objects.all()
+        return articles
+
+class ArticleCategoryList(ArticleList):
+    def get_queryset(self, *args, **kwargs):
+        articles = Article.objects.filter(category__slug=self.kwargs['slug']).distinct()
+        return articles
+
+
+

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ item.title }} - Мій Блог{% endblock %}
+
+{% block extra_head %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+    <article class="article-detail">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Головна</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'articles-list' %}">Публікації</a></li>
+                {% if item.category %}
+                <li class="breadcrumb-item"><a href="{{ item.category.get_absolute_url }}">{{ item.category.name }}</a></li>
+                {% endif %}
+                <li class="breadcrumb-item active" aria-current="page">{{ item.title|truncatechars:50 }}</li>
+            </ol>
+        </nav>
+
+        <h3>{{ item.title }}</h3>
+        <p class="article-meta">Опубліковано: {{ item.pub_date|date:"d F Y H:i" }}</p>
+
+        {% if images %}
+            <div class="fotorama-container">
+                {% include 'fotorama.html' with images=images %}
+            </div>
+        {% endif %}
+
+        <div class="article-content">
+            {% if item.description %}
+                <strong>{{ item.description|safe }}</strong>
+                <hr>
+            {% endif %}
+
+            {{ item.text|linebreaksbr }} 
+        </div>
+
+    </article>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+{% endblock %}
